@@ -21,13 +21,13 @@ public class TokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("faculdade")
+                    .withIssuer("floricultura")
                     .withSubject(user.getLogin())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {
-            throw new RuntimeException("Erro durante a geração do token", exception);
+            throw new RuntimeException("Erro de geração de token", exception);
         }
     }
 
@@ -35,7 +35,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("faculdade")
+                    .withIssuer("floricultura")
                     .build()
                     .verify(token)
                     .getSubject();
